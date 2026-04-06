@@ -29,6 +29,9 @@ from homeassistant.helpers.selector import (
     SelectSelector,
     SelectSelectorConfig,
     SelectSelectorMode,
+    NumberSelector,
+    NumberSelectorConfig,
+    NumberSelectorMode,
     TextSelector,
     TextSelectorConfig,
     TextSelectorType,
@@ -37,6 +40,7 @@ from homeassistant.util import slugify
 import voluptuous as vol
 
 from .const import (
+    CONF_BRIGHTNESS,
     CONF_COLOR,
     CONF_DURATION,
     CONF_EFFECT,
@@ -248,6 +252,9 @@ class LampieFlowCoordinator:
                         )
                     ),
                     vol.Optional(
+                        CONF_BRIGHTNESS,
+                    ): NumberSelector(NumberSelectorConfig(min=0.0, max=100.0, unit_of_measurement="%")),
+                    vol.Optional(
                         CONF_DURATION,
                     ): TextSelector(TextSelectorConfig(type=TextSelectorType.TEXT)),
                     vol.Required(
@@ -362,6 +369,7 @@ class LampieFlowCoordinator:
             self.entry_data = {**user_input, **advanced_options}
 
             if self.entry_data.get(CONF_LED_CONFIG):
+                self.entry_data.pop(CONF_BRIGHTNESS, None)
                 self.entry_data.pop(CONF_COLOR, None)
                 self.entry_data.pop(CONF_EFFECT, None)
                 self.entry_data.pop(CONF_DURATION, None)
@@ -413,7 +421,7 @@ class LampieFlowCoordinator:
         advanced_options = user_input.get(SECTION_ADVANCED_OPTIONS, {})
         led_config = advanced_options.get(CONF_LED_CONFIG, [])
 
-        for key in [CONF_COLOR, CONF_EFFECT, CONF_DURATION]:
+        for key in [CONF_BRIGHTNESS, CONF_COLOR, CONF_EFFECT, CONF_DURATION]:
             if user_input.get(key):
                 errors[SECTION_ADVANCED_OPTIONS] = "invalid_led_config_override"
                 description_placeholders["key"] = key

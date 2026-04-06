@@ -16,6 +16,7 @@ from pytest_homeassistant_custom_component.common import MockConfigEntry
 
 from custom_components.lampie.config_flow import SECTION_ADVANCED_OPTIONS
 from custom_components.lampie.const import (
+    CONF_BRIGHTNESS,
     CONF_COLOR,
     CONF_DURATION,
     CONF_EFFECT,
@@ -35,6 +36,7 @@ FLOW_SCENARIOS = {
         "user_input": {
             CONF_NAME: "Medicine",
             CONF_COLOR: "cyan",
+            CONF_BRIGHTNESS: 0.0,
             CONF_EFFECT: "slow_blink",
             CONF_SWITCH_ENTITIES: ["light.dining_room"],
             CONF_DURATION: "4:00",
@@ -44,6 +46,7 @@ FLOW_SCENARIOS = {
             "data": {
                 CONF_NAME: "Medicine",
                 CONF_COLOR: "cyan",
+                CONF_BRIGHTNESS: 0.0,
                 CONF_EFFECT: "slow_blink",
                 CONF_SWITCH_ENTITIES: ["light.dining_room"],
                 CONF_DURATION: "4:00",
@@ -54,6 +57,7 @@ FLOW_SCENARIOS = {
         "user_input": {
             CONF_NAME: "Medicine",
             CONF_COLOR: "cyan",
+            CONF_BRIGHTNESS: 1.0,
             CONF_EFFECT: "slow_blink",
             CONF_SWITCH_ENTITIES: ["light.kitchen"],
         },
@@ -67,6 +71,7 @@ FLOW_SCENARIOS = {
             "data": {
                 CONF_NAME: "Medicine",
                 CONF_COLOR: "cyan",
+                CONF_BRIGHTNESS: 1.0,
                 CONF_EFFECT: "slow_blink",
                 CONF_SWITCH_ENTITIES: ["light.kitchen"],
                 CONF_PRIORITY: {
@@ -106,31 +111,37 @@ FLOW_SCENARIOS = {
                 CONF_LED_CONFIG: [
                     {
                         CONF_COLOR: "red",
+                        CONF_BRIGHTNESS: 50.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "orange",
+                        # CONF_BRIGHTNESS not set here intentionally, assumes default
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "white",
+                        CONF_BRIGHTNESS: 75.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "red",
+                        CONF_BRIGHTNESS: 25.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "orange",
+                        CONF_BRIGHTNESS: 10.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "white",
+                        CONF_BRIGHTNESS: 0.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
@@ -146,31 +157,37 @@ FLOW_SCENARIOS = {
                 CONF_LED_CONFIG: [
                     {
                         CONF_COLOR: "red",
+                        CONF_BRIGHTNESS: 50.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "orange",
+                        CONF_BRIGHTNESS: 100.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "white",
+                        CONF_BRIGHTNESS: 75.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "red",
+                        CONF_BRIGHTNESS: 25.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "orange",
+                        CONF_BRIGHTNESS: 10.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
                     {
                         CONF_COLOR: "white",
+                        CONF_BRIGHTNESS: 0.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
@@ -242,6 +259,26 @@ FLOW_SCENARIOS = {
             "description_placeholders": {
                 "config_title": "Medicine",
             },
+        },
+    },
+    "missing_brightness": {
+        "user_input": {
+            CONF_NAME: "Medicine",
+            CONF_COLOR: "red",
+            CONF_EFFECT: "slow_blink",
+            CONF_SWITCH_ENTITIES: ["light.dining_room"],
+            CONF_DURATION: "4:00",
+        },
+        "priority_inputs": [],
+        "expected_result": {
+            "data": {
+                CONF_NAME: "Medicine",
+                CONF_COLOR: "red",
+                CONF_BRIGHTNESS: 100.0,
+                CONF_EFFECT: "slow_blink",
+                CONF_SWITCH_ENTITIES: ["light.dining_room"],
+                CONF_DURATION: "4:00",
+            }
         },
     },
     "invalid_color_string": {
