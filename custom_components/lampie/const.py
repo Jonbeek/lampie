@@ -31,6 +31,8 @@ CONF_PRIORITY: Final = "priority"
 CONF_START_ACTION: Final = "start_action"
 CONF_SWITCH_ENTITIES: Final = "switches"
 
+DEFAULT_BRIGHTNESS: Final = 100.0
+
 INOVELLI_MODELS = {
     "VZM30-SN",  # switch
     "VZM31-SN",  # two in one switch/dimmer

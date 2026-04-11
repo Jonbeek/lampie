@@ -11,11 +11,13 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 from homeassistant.util import slugify
 
 from .const import (
+    CONF_BRIGHTNESS,
     CONF_COLOR,
     CONF_DURATION,
     CONF_EFFECT,
     CONF_LED_CONFIG,
     CONF_SWITCH_ENTITIES,
+    DEFAULT_BRIGHTNESS,
     DOMAIN,
 )
 from .types import LampieConfigEntry, LEDConfig
@@ -49,6 +51,7 @@ class LampieUpdateCoordinator(DataUpdateCoordinator[None]):
                     CONF_LED_CONFIG,
                     [
                         {
+                            CONF_BRIGHTNESS: config_entry.data.get(CONF_BRIGHTNESS, DEFAULT_BRIGHTNESS),
                             CONF_COLOR: config_entry.data.get(CONF_COLOR),
                             CONF_EFFECT: config_entry.data.get(CONF_EFFECT),
                             CONF_DURATION: config_entry.data.get(CONF_DURATION),

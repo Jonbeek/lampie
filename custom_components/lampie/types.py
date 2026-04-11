@@ -25,6 +25,7 @@ from .const import (
     CONF_COLOR,
     CONF_DURATION,
     CONF_EFFECT,
+    DEFAULT_BRIGHTNESS,
 )
 
 if TYPE_CHECKING:
@@ -128,7 +129,7 @@ class LEDConfig:
 
     color: Color | int
     effect: Effect
-    brightness: float = 100.0
+    brightness: float = DEFAULT_BRIGHTNESS
     duration: int | None = None
 
     def to_dict(self) -> dict[str, Any]:
@@ -161,7 +162,7 @@ class LEDConfig:
 
         color = config.get(CONF_COLOR, Color.BLUE.name)
         color = Color.parse_or_validate_in_range(color)
-        brightness: float = config.get(CONF_BRIGHTNESS, 100.0)
+        brightness: float = config.get(CONF_BRIGHTNESS, DEFAULT_BRIGHTNESS)
         effect: Effect = getattr(
             Effect, config.get(CONF_EFFECT, Effect.SOLID.name).upper()
         )
