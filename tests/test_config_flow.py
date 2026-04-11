@@ -117,7 +117,6 @@ FLOW_SCENARIOS = {
                     },
                     {
                         CONF_COLOR: "orange",
-                        # CONF_BRIGHTNESS not set here intentionally, assumes default
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
@@ -163,7 +162,6 @@ FLOW_SCENARIOS = {
                     },
                     {
                         CONF_COLOR: "orange",
-                        CONF_BRIGHTNESS: 100.0,
                         CONF_EFFECT: "slow_blink",
                         CONF_DURATION: "4:00",
                     },
@@ -259,26 +257,6 @@ FLOW_SCENARIOS = {
             "description_placeholders": {
                 "config_title": "Medicine",
             },
-        },
-    },
-    "missing_brightness": {
-        "user_input": {
-            CONF_NAME: "Medicine",
-            CONF_COLOR: "red",
-            CONF_EFFECT: "slow_blink",
-            CONF_SWITCH_ENTITIES: ["light.dining_room"],
-            CONF_DURATION: "4:00",
-        },
-        "priority_inputs": [],
-        "expected_result": {
-            "data": {
-                CONF_NAME: "Medicine",
-                CONF_COLOR: "red",
-                CONF_BRIGHTNESS: 100.0,
-                CONF_EFFECT: "slow_blink",
-                CONF_SWITCH_ENTITIES: ["light.dining_room"],
-                CONF_DURATION: "4:00",
-            }
         },
     },
     "invalid_color_string": {
